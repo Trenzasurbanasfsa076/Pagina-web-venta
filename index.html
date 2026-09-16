@@ -1,904 +1,5078 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Trenzas Urbanas Shop</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
-}
-
-body{
-
-background:linear-gradient(180deg,#4B0082,#6A0DAD,#8A2BE2);
-
-color:#fff;
-
-}
-
-header{
-
-background:#3A0068;
-
-padding:25px;
-
-text-align:center;
-
-box-shadow:0 4px 15px rgba(0,0,0,.35);
-
-position:sticky;
-
-top:0;
-
-z-index:999;
-
-}
-
-header h1{
-
-font-size:38px;
-
-font-weight:800;
-
-}
-
-header p{
-
-margin-top:8px;
-
-opacity:.9;
-
-}
-
-.buscador{
-
-width:95%;
-
-max-width:700px;
-
-margin:25px auto;
-
-display:flex;
-
-}
-
-.buscador input{
-
-width:100%;
-
-padding:15px;
-
-border:none;
-
-border-radius:15px;
-
-font-size:16px;
-
-outline:none;
-
-}
-
-.container{
-
-width:95%;
-
-max-width:1400px;
-
-margin:auto;
-
-padding-bottom:150px;
-
-}
-
-.produtos{
-
-display:grid;
-
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-
-gap:25px;
-
-}
-
-.card{
-
-background:#fff;
-
-border-radius:20px;
-
-overflow:hidden;
-
-color:#222;
-
-box-shadow:0 8px 25px rgba(0,0,0,.25);
-
-transition:.3s;
-
-}
-
-.card:hover{
-
-transform:translateY(-6px);
-
-}
-
-.imagen{
-
-height:240px;
-
-background:#efefef;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-overflow:hidden;
-
-}
-
-.imagen img{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
-
-}
-
-.info{
-
-padding:18px;
-
-}
-
-.nombre{
-
-font-size:18px;
-
-font-weight:700;
-
-margin-bottom:10px;
-
-}
-
-.descripcion{
-
-font-size:14px;
-
-color:#666;
-
-margin-bottom:12px;
-
-}
-
-.precio{
-
-font-size:28px;
-
-font-weight:800;
-
-color:#6A0DAD;
-
-margin-bottom:15px;
-
-}
-
-.cantidad{
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:15px;
-
-margin-bottom:15px;
-
-}
-
-.cantidad button{
-
-width:40px;
-
-height:40px;
-
-border:none;
-
-border-radius:10px;
-
-background:#6A0DAD;
-
-color:white;
-
-font-size:22px;
-
-cursor:pointer;
-
-}
-
-.cantidad span{
-
-font-size:20px;
-
-font-weight:bold;
-
-min-width:25px;
-
-text-align:center;
-
-}
-
-.agregar{
-
-width:100%;
-
-padding:14px;
-
-background:#6A0DAD;
-
-border:none;
-
-border-radius:12px;
-
-color:white;
-
-font-size:16px;
-
-font-weight:700;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-.agregar:hover{
-
-background:#4B0082;
-
-}
-
-#carrito{
-
-position:fixed;
-
-right:20px;
-
-bottom:20px;
-
-width:360px;
-
-background:white;
-
-color:#222;
-
-border-radius:20px;
-
-padding:20px;
-
-box-shadow:0 10px 35px rgba(0,0,0,.35);
-
-z-index:999;
-
-max-height:80vh;
-
-overflow:auto;
-
-}
-
-#carrito h2{
-
-color:#6A0DAD;
-
-text-align:center;
-
-margin-bottom:15px;
-
-}
-
-.contador{
-
-position:absolute;
-
-top:-10px;
-
-right:-10px;
-
-width:28px;
-
-height:28px;
-
-border-radius:50%;
-
-background:red;
-
-color:white;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:14px;
-
-font-weight:bold;
-
-}
-
-.item{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin:12px 0;
-
-border-bottom:1px solid #eee;
-
-padding-bottom:8px;
-
-}
-
-.item button{
-
-background:red;
-
-color:white;
-
-border:none;
-
-padding:5px 10px;
-
-border-radius:8px;
-
-cursor:pointer;
-
-}
-
-.total{
-
-margin-top:15px;
-
-font-size:22px;
-
-font-weight:bold;
-
-text-align:center;
-
-color:#6A0DAD;
-
-}
-
-.finalizar{
-
-width:100%;
-
-margin-top:15px;
-
-padding:15px;
-
-border:none;
-
-border-radius:12px;
-
-background:#25D366;
-
-color:white;
-
-font-size:18px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-}
-
-@media(max-width:768px){
-
-#carrito{
-
-position:relative;
-
-width:100%;
-
-right:0;
-
-bottom:0;
-
-margin-top:30px;
-
-}
-
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tienda Urban | Tienda Online</title>
+  <meta name="description" content="Tienda online ficticia y reutilizable.">
+  <meta name="theme-color" content="#8b5cf6">
+
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-dark: #6d28d9;
+      --primary-light: #a78bfa;
+
+      --bg: #0b0b0f;
+      --bg-secondary: #121218;
+      --card: #18181f;
+      --card-hover: #20202a;
+
+      --text: #ffffff;
+      --text-secondary: #a7a7b3;
+      --border: rgba(255,255,255,.09);
+
+      --success: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+
+      --radius: 18px;
+      --max-width: 1250px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body.no-scroll {
+      overflow: hidden;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max-width));
+      margin: auto;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: 72px;
+      background: rgba(11,11,15,.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .header-left {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .header-right {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .icon-btn {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg-secondary);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 21px;
+      transition: .2s;
+    }
+
+    .icon-btn:hover {
+      background: var(--card-hover);
+      border-color: var(--primary);
+    }
+
+    .logo-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: white;
+      overflow: hidden;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: var(--primary);
+      color: white;
+      font-size: 11px;
+      font-weight: bold;
+      display: grid;
+      place-items: center;
+      border: 2px solid var(--bg);
+    }
+
+    /* =========================
+       SIDE MENU
+    ========================= */
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      z-index: 1100;
+      opacity: 0;
+      visibility: hidden;
+      transition: .25s;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .side-menu {
+      position: fixed;
+      z-index: 1200;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: min(340px, 88vw);
+      background: #111116;
+      border-right: 1px solid var(--border);
+      transform: translateX(-100%);
+      transition: .3s ease;
+      padding: 22px;
+      overflow-y: auto;
+    }
+
+    .side-menu.active {
+      transform: translateX(0);
+    }
+
+    .side-menu-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 25px;
+    }
+
+    .side-menu h2 {
+      font-size: 20px;
+    }
+
+    .menu-close {
+      background: transparent;
+      border: 0;
+      color: white;
+      font-size: 25px;
+    }
+
+    .menu-links {
+      list-style: none;
+      display: grid;
+      gap: 5px;
+    }
+
+    .menu-links a,
+    .menu-category {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 13px 14px;
+      border-radius: 12px;
+      color: var(--text-secondary);
+      transition: .2s;
+    }
+
+    .menu-links a:hover,
+    .menu-category:hover {
+      color: white;
+      background: var(--card);
+    }
+
+    .menu-subtitle {
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 20px 10px 7px;
+      opacity: .6;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 560px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(11,11,15,.96), rgba(11,11,15,.65)),
+        url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1800&q=85")
+        center/cover;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      right: -200px;
+      top: -180px;
+      background: var(--primary);
+      opacity: .18;
+      filter: blur(100px);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+      padding: 80px 0;
+    }
+
+    .hero-label {
+      display: inline-block;
+      padding: 7px 12px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.06);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--primary-light);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(40px, 7vw, 76px);
+      line-height: .98;
+      margin-bottom: 20px;
+      letter-spacing: -3px;
+    }
+
+    .hero p {
+      color: #d0d0d8;
+      font-size: 18px;
+      max-width: 570px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 13px 20px;
+      font-weight: 700;
+      transition: .2s;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      color: white;
+      background: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--card);
+      color: white;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--card-hover);
+    }
+
+    .btn-danger {
+      background: rgba(239,68,68,.12);
+      color: #ff8a8a;
+      border: 1px solid rgba(239,68,68,.2);
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    section {
+      padding: 75px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(25px, 4vw, 36px);
+      margin-bottom: 5px;
+    }
+
+    .section-header p {
+      color: var(--text-secondary);
+    }
+
+    .section-link {
+      color: var(--primary-light);
+      white-space: nowrap;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* =========================
+       CATEGORIES
+    ========================= */
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .category-card {
+      min-height: 125px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: end;
+      position: relative;
+      overflow: hidden;
+      transition: .2s;
+    }
+
+    .category-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary);
+    }
+
+    .category-icon {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 32px;
+      opacity: .25;
+    }
+
+    .category-card strong {
+      font-size: 15px;
+    }
+
+    .category-card span {
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+
+    /* =========================
+       PRODUCT HORIZONTAL
+    ========================= */
+
+    .products-wrapper {
+      position: relative;
+    }
+
+    .products-row {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(230px, 270px);
+      grid-template-rows: 1fr;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      padding: 3px 2px 12px;
+    }
+
+    .products-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .scroll-btn {
+      position: absolute;
+      z-index: 5;
+      top: 45%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(15,15,20,.95);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+    }
+
+    .scroll-left {
+      left: -20px;
+    }
+
+    .scroll-right {
+      right: -20px;
+    }
+
+    /* =========================
+       PRODUCT CARD
+    ========================= */
+
+    .product-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: .2s;
+      min-width: 0;
+    }
+
+    .product-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(139,92,246,.4);
+    }
+
+    .product-image {
+      height: 250px;
+      position: relative;
+      overflow: hidden;
+      background: #222;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: .4s;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.04);
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--primary);
+      font-size: 11px;
+      font-weight: bold;
+      z-index: 2;
+    }
+
+    .badge-sale {
+      background: var(--danger);
+    }
+
+    .badge-stock {
+      top: auto;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0,0,0,.72);
+    }
+
+    .product-info {
+      padding: 16px;
+    }
+
+    .product-category {
+      color: var(--primary-light);
+      text-transform: uppercase;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: .8px;
+      margin-bottom: 5px;
+    }
+
+    .product-name {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .product-description {
+      color: var(--text-secondary);
+      font-size: 12px;
+      min-height: 36px;
+      margin-bottom: 12px;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 13px;
+      flex-wrap: wrap;
+    }
+
+    .price {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .old-price {
+      color: #777;
+      text-decoration: line-through;
+      font-size: 13px;
+    }
+
+    .product-card .btn {
+      padding: 11px 13px;
+      font-size: 13px;
+    }
+
+    .out-of-stock {
+      opacity: .7;
+    }
+
+    /* =========================
+       SEARCH
+    ========================= */
+
+    .search-section {
+      background: var(--bg-secondary);
+      padding: 35px 0;
+    }
+
+    .search-box {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 48px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: white;
+      border-radius: 12px;
+      padding: 0 16px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    /* =========================
+       PRODUCT CATALOG
+    ========================= */
+
+    .catalog-tools {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 25px;
+    }
+
+    .filter-control {
+      background: var(--card);
+      color: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 13px;
+      outline: none;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    /* =========================
+       INFO SECTIONS
+    ========================= */
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 25px;
+    }
+
+    .info-icon {
+      font-size: 30px;
+      margin-bottom: 14px;
+    }
+
+    .info-card h3 {
+      margin-bottom: 8px;
+    }
+
+    .info-card p,
+    .info-card li {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step {
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+      padding: 15px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+    }
+
+    .step-number {
+      min-width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--primary);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    /* =========================
+       CONTACT / FOOTER
+    ========================= */
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 20px;
+    }
+
+    .contact-main,
+    .map-box {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--card);
+      padding: 28px;
+    }
+
+    .contact-links {
+      display: grid;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .contact-link {
+      padding: 13px;
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      color: #ddd;
+    }
+
+    .contact-link:hover {
+      color: white;
+      background: var(--card-hover);
+    }
+
+    .map-placeholder {
+      min-height: 250px;
+      border-radius: 13px;
+      background:
+        linear-gradient(rgba(0,0,0,.4), rgba(0,0,0,.4)),
+        url("https://images.unsplash.com/photo-1524666041070-9c8764150f1a?auto=format&fit=crop&w=900&q=80")
+        center/cover;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    footer {
+      padding: 45px 0 25px;
+      background: #08080b;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 35px;
+    }
+
+    footer h3 {
+      margin-bottom: 12px;
+    }
+
+    footer p,
+    footer a {
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: 7px;
+    }
+
+    .copyright {
+      border-top: 1px solid var(--border);
+      margin-top: 35px;
+      padding-top: 20px;
+      text-align: center;
+      color: #666;
+      font-size: 12px;
+    }
+
+    /* =========================
+       CART DRAWER
+    ========================= */
+
+    .cart-drawer {
+      position: fixed;
+      z-index: 1300;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: min(500px, 100%);
+      background: #111116;
+      border-left: 1px solid var(--border);
+      transform: translateX(100%);
+      transition: .3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cart-drawer.active {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drawer-close {
+      background: transparent;
+      border: 0;
+      color: white;
+      font-size: 25px;
+    }
+
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 70px 1fr;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cart-item-img {
+      width: 70px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .cart-item-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .cart-item-meta {
+      color: var(--text-secondary);
+      font-size: 11px;
+      margin: 3px 0;
+    }
+
+    .cart-item-price {
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quantity-control button {
+      width: 27px;
+      height: 27px;
+      border-radius: 7px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: white;
+    }
+
+    .remove-item {
+      margin-left: 8px;
+      border: 0 !important;
+      background: transparent !important;
+      color: #ff7777 !important;
+      width: auto !important;
+    }
+
+    .cart-empty {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--text-secondary);
+      padding: 30px;
+    }
+
+    .cart-summary {
+      border-top: 1px solid var(--border);
+      padding: 18px;
+      background: #0d0d11;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    .summary-total {
+      color: white;
+      font-size: 21px;
+      font-weight: 800;
+      padding-top: 10px;
+      margin-top: 8px;
+      border-top: 1px solid var(--border);
+    }
+
+    .delivery-selector {
+      display: grid;
+      gap: 8px;
+      margin: 15px 0;
+    }
+
+    .delivery-option {
+      padding: 13px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .delivery-option:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(139,92,246,.1);
+    }
+
+    .delivery-option input {
+      margin-right: 7px;
+    }
+
+    .shipping-note {
+      display: none;
+      color: var(--warning);
+      font-size: 12px;
+      padding: 10px;
+      background: rgba(245,158,11,.08);
+      border-radius: 8px;
+    }
+
+    .shipping-note.show {
+      display: block;
+    }
+
+    /* =========================
+       MODALS
+    ========================= */
+
+    .modal {
+      position: fixed;
+      z-index: 1500;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(0,0,0,.78);
+    }
+
+    .modal.active {
+      display: grid;
+    }
+
+    .modal-content {
+      width: min(700px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      background: #111116;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 25px;
+      position: relative;
+    }
+
+    .modal-large {
+      width: min(850px, 100%);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: 0;
+      color: white;
+      font-size: 26px;
+    }
+
+    /* =========================
+       PRODUCT MODAL
+    ========================= */
+
+    .product-detail {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
+    .product-detail-image {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .variant-group {
+      margin: 18px 0;
+    }
+
+    .variant-group label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .variant-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .variant-btn {
+      padding: 9px 13px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: white;
+    }
+
+    .variant-btn.active {
+      border-color: var(--primary);
+      background: rgba(139,92,246,.15);
+    }
+
+    /* =========================
+       CHECKOUT
+    ========================= */
+
+    .checkout-steps {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 25px;
+    }
+
+    .checkout-step {
+      flex: 1;
+      height: 5px;
+      border-radius: 99px;
+      background: var(--card);
+    }
+
+    .checkout-step.active {
+      background: var(--primary);
+    }
+
+    .checkout-panel {
+      display: none;
+    }
+
+    .checkout-panel.active {
+      display: block;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-control {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: white;
+      border-radius: 10px;
+      padding: 12px;
+      outline: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+    }
+
+    textarea.form-control {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .payment-options {
+      display: grid;
+      gap: 9px;
+    }
+
+    .payment-option {
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+      cursor: pointer;
+    }
+
+    .payment-option:has(input:checked) {
+      border-color: var(--primary);
+      background: rgba(139,92,246,.1);
+    }
+
+    .bank-data {
+      display: none;
+      padding: 15px;
+      margin-top: 10px;
+      background: var(--bg-secondary);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      font-size: 13px;
+    }
+
+    .bank-data.show {
+      display: block;
+    }
+
+    .checkout-buttons {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .order-review {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 17px;
+      margin-bottom: 15px;
+    }
+
+    .review-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+
+    .review-row:last-child {
+      border-bottom: 0;
+    }
+
+    .review-row span:first-child {
+      color: var(--text-secondary);
+    }
+
+    .receipt-box {
+      border: 1px dashed rgba(255,255,255,.2);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .receipt-box input {
+      margin-top: 10px;
+      max-width: 100%;
+    }
+
+    /* =========================
+       SUCCESS
+    ========================= */
+
+    .success {
+      text-align: center;
+      padding: 25px 10px;
+    }
+
+    .success-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: rgba(34,197,94,.12);
+      color: var(--success);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px;
+      font-size: 35px;
+    }
+
+    .order-number {
+      color: var(--primary-light);
+      font-size: 23px;
+      font-weight: 900;
+      margin: 10px 0 20px;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast-container {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 3000;
+      display: grid;
+      gap: 8px;
+    }
+
+    .toast {
+      background: #202027;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary);
+      color: white;
+      padding: 13px 15px;
+      border-radius: 10px;
+      min-width: 260px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.4);
+      animation: toastIn .25s ease;
+      font-size: 13px;
+    }
+
+    @keyframes toastIn {
+      from {
+        transform: translateX(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 1000px) {
+      .catalog-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .header {
+        height: 64px;
+      }
+
+      .logo-area span {
+        display: none;
+      }
+
+      .hero {
+        min-height: 530px;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .product-image {
+        height: 210px;
+      }
+
+      .info-grid,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .product-detail {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .scroll-btn {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: min(100% - 22px, var(--max-width));
+      }
+
+      .hero-content {
+        padding: 60px 0;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .categories-grid {
+        gap: 8px;
+      }
+
+      .category-card {
+        min-height: 105px;
+        padding: 15px;
+      }
+
+      .catalog-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .product-image {
+        height: 180px;
+      }
+
+      .product-info {
+        padding: 12px;
+      }
+
+      .product-name {
+        font-size: 15px;
+      }
+
+      .price {
+        font-size: 17px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-group.full {
+        grid-column: auto;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-box {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-buttons {
+        flex-direction: column-reverse;
+      }
+
+      .checkout-buttons .btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
+  <!-- =========================
+       HEADER
+  ========================== -->
 
-<h1>💜 Trenzas Urbanas Shop</h1>
+  <header class="header">
+    <div class="container header-inner">
 
-<p>Todo para tus trenzas en un solo lugar</p>
+      <div class="header-left">
+        <button class="icon-btn" id="menuBtn" aria-label="Abrir menú">
+          ☰
+        </button>
+      </div>
 
-</header>
+      <a href="#inicio" class="logo-area">
+        <div class="logo">
+          TU
+        </div>
+        <span id="headerStoreName">Tienda Urban</span>
+      </a>
 
-<div class="buscador">
+      <div class="header-right">
+        <button class="icon-btn" id="cartBtn" aria-label="Abrir carrito">
+          🛒
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
 
-<input
-type="text"
-id="buscar"
-placeholder="🔍 Buscar productos...">
+    </div>
+  </header>
 
-</div>
+  <!-- OVERLAY -->
 
-<div class="container">
+  <div class="overlay" id="overlay"></div>
 
-<div class="produtos">
+  <!-- =========================
+       SIDE MENU
+  ========================== -->
 
-<!-- PRODUCTO 1 -->
-<div class="card">
+  <aside class="side-menu" id="sideMenu">
 
-<div class="imagen">
-<img src="img/producto1.jpg" alt="Gel Natural Fix">
-</div>
+    <div class="side-menu-header">
+      <h2>Menú</h2>
+      <button class="menu-close" id="menuClose">×</button>
+    </div>
 
-<div class="info">
+    <ul class="menu-links">
 
-<div class="nombre">
-Gel Efecto Húmedo Natural Fix x 1 Kg - Fidelité
-</div>
+      <li>
+        <a href="#inicio" class="menu-link">Inicio</a>
+      </li>
 
-<div class="descripcion">
-Fijación natural ideal para peinados y trenzas.
-</div>
+      <li>
+        <a href="#productos" class="menu-link">Productos</a>
+      </li>
 
-<div class="precio">$8.700</div>
+      <li>
+        <a href="#categorias" class="menu-link">Categorías</a>
+      </li>
 
-<div class="cantidad">
+      <li>
+        <a href="#novedades" class="menu-link">Novedades</a>
+      </li>
 
-<button onclick="restar(0)">−</button>
+      <li>
+        <a href="#ofertas" class="menu-link">Ofertas</a>
+      </li>
 
-<span id="cant0">1</span>
+      <li>
+        <a href="#como-comprar" class="menu-link">Cómo comprar</a>
+      </li>
 
-<button onclick="sumar(0)">+</button>
+      <li>
+        <a href="#envios" class="menu-link">Envíos</a>
+      </li>
 
-</div>
+      <li>
+        <a href="#pagos" class="menu-link">Medios de pago</a>
+      </li>
 
-<button class="agregar" onclick="agregarCarrito(0)">
-Agregar al carrito
-</button>
+      <li>
+        <a href="#ubicacion" class="menu-link">Dónde estamos</a>
+      </li>
 
-</div>
+      <li>
+        <a href="#contacto" class="menu-link">Contacto</a>
+      </li>
 
-</div>
+    </ul>
 
-<!-- PRODUCTO 2 -->
+    <div class="menu-subtitle">Categorías</div>
 
-<div class="card">
+    <div id="menuCategories"></div>
 
-<div class="imagen">
-<img src="img/producto2.jpg" alt="Super Fix">
-</div>
+  </aside>
 
-<div class="info">
+  <!-- =========================
+       HERO
+  ========================== -->
 
-<div class="nombre">
-Gel Super Fix x 1 Kg - Fidelité
-</div>
+  <main>
 
-<div class="descripcion">
-Fijación extrema de larga duración.
-</div>
+    <section class="hero" id="inicio">
 
-<div class="precio">$15.800</div>
+      <div class="container hero-content">
 
-<div class="cantidad">
+        <span class="hero-label">TIENDA ONLINE</span>
 
-<button onclick="restar(1)">−</button>
+        <h1 id="heroTitle">
+          Todo lo que buscás, en un solo lugar.
+        </h1>
 
-<span id="cant1">1</span>
+        <p id="heroDescription">
+          Descubrí nuestra colección de productos y realizá tu compra de forma rápida, cómoda y segura.
+        </p>
 
-<button onclick="sumar(1)">+</button>
+        <a href="#productos" class="btn btn-primary">
+          VER PRODUCTOS
+        </a>
 
-</div>
+      </div>
 
-<button class="agregar" onclick="agregarCarrito(1)">
-Agregar al carrito
-</button>
+    </section>
 
-</div>
+    <!-- =========================
+         SEARCH
+    ========================== -->
 
-</div>
+    <section class="search-section">
 
-<!-- PRODUCTO 3 -->
+      <div class="container">
 
-<div class="card">
+        <div class="search-box">
 
-<div class="imagen">
-<img src="img/producto3.jpg" alt="Super Fix 230">
-</div>
+          <input
+            type="search"
+            class="search-input"
+            id="searchInput"
+            placeholder="¿Qué estás buscando?"
+          >
 
-<div class="info">
+          <button class="btn btn-primary" id="searchBtn">
+            🔎 Buscar
+          </button>
 
-<div class="nombre">
-Gel Super Fix x 230 ml - Fidelité
-</div>
+        </div>
 
-<div class="descripcion">
-Extra duración para peinados impecables.
-</div>
+      </div>
 
-<div class="precio">$7.100</div>
+    </section>
 
-<div class="cantidad">
+    <!-- =========================
+         CATEGORIES
+    ========================== -->
 
-<button onclick="restar(2)">−</button>
+    <section id="categorias">
 
-<span id="cant2">1</span>
+      <div class="container">
 
-<button onclick="sumar(2)">+</button>
+        <div class="section-header">
+          <div>
+            <h2>Categorías</h2>
+            <p>Encontrá rápidamente lo que buscás.</p>
+          </div>
+        </div>
 
-</div>
+        <div class="categories-grid" id="categoriesGrid"></div>
 
-<button class="agregar" onclick="agregarCarrito(2)">
-Agregar al carrito
-</button>
+      </div>
 
-</div>
+    </section>
 
-</div>
-<!-- PRODUCTO 4 -->
-<div class="card">
+    <!-- =========================
+         NOVEDADES
+    ========================== -->
 
-<div class="imagen">
-<img src="img/producto4.jpg" alt="Beauty Walfor Extra Duro 450">
-</div>
+    <section id="novedades">
 
-<div class="info">
+      <div class="container">
 
-<div class="nombre">Gel Fijador Premium Extra Duro 450 g - Beauty Walfor</div>
+        <div class="section-header">
+          <div>
+            <h2>Novedades</h2>
+            <p>Los productos más recientes.</p>
+          </div>
 
-<div class="descripcion">Ideal para trenzas y peinados de larga duración.</div>
+          <a href="#productos" class="section-link">
+            Ver todos →
+          </a>
+        </div>
 
-<div class="precio">$6.700</div>
+        <div class="products-wrapper">
 
-<div class="cantidad">
-<button onclick="restar(3)">−</button>
-<span id="cant3">1</span>
-<button onclick="sumar(3)">+</button>
-</div>
+          <button class="scroll-btn scroll-left" data-target="newProducts">
+            ←
+          </button>
 
-<button class="agregar" onclick="agregarCarrito(3)">
-Agregar al carrito
-</button>
+          <div class="products-row" id="newProducts"></div>
 
-</div>
+          <button class="scroll-btn scroll-right" data-target="newProducts">
+            →
+          </button>
 
-</div>
+        </div>
 
-<!-- PRODUCTO 5 -->
-<div class="card">
+      </div>
 
-<div class="imagen">
-<img src="img/producto5.jpg" alt="Beauty Walfor Extra Duro 250">
-</div>
+    </section>
 
-<div class="info">
+    <!-- =========================
+         MÁS VENDIDOS
+    ========================== -->
 
-<div class="nombre">Gel Fijador Premium Extra Duro 250 g - Beauty Walfor</div>
+    <section>
 
-<div class="descripcion">Fijación fuerte para uso diario.</div>
+      <div class="container">
 
-<div class="precio">$4.300</div>
+        <div class="section-header">
+          <div>
+            <h2>Más vendidos</h2>
+            <p>Productos destacados de la tienda.</p>
+          </div>
+        </div>
 
-<div class="cantidad">
-<button onclick="restar(4)">−</button>
-<span id="cant4">1</span>
-<button onclick="sumar(4)">+</button>
-</div>
+        <div class="products-wrapper">
 
-<button class="agregar" onclick="agregarCarrito(4)">
-Agregar al carrito
-</button>
+          <button class="scroll-btn scroll-left" data-target="bestProducts">
+            ←
+          </button>
 
-</div>
+          <div class="products-row" id="bestProducts"></div>
 
-</div>
+          <button class="scroll-btn scroll-right" data-target="bestProducts">
+            →
+          </button>
 
-<!-- PRODUCTO 6 -->
-<div class="card">
+        </div>
 
-<div class="imagen">
-<img src="img/producto6.jpg" alt="Beauty Walfor Extra Duro 900">
-</div>
+      </div>
 
-<div class="info">
+    </section>
 
-<div class="nombre">Gel Fijador Premium Extra Duro 900 g - Beauty Walfor</div>
+    <!-- =========================
+         OFERTAS
+    ========================== -->
 
-<div class="descripcion">Presentación grande para uso profesional.</div>
+    <section id="ofertas">
 
-<div class="precio">$12.000</div>
+      <div class="container">
 
-<div class="cantidad">
-<button onclick="restar(5)">−</button>
-<span id="cant5">1</span>
-<button onclick="sumar(5)">+</button>
-</div>
+        <div class="section-header">
+          <div>
+            <h2>Ofertas</h2>
+            <p>Encontrá productos con descuentos.</p>
+          </div>
+        </div>
 
-<button class="agregar" onclick="agregarCarrito(5)">
-Agregar al carrito
-</button>
+        <div class="products-wrapper">
 
-</div>
+          <button class="scroll-btn scroll-left" data-target="saleProducts">
+            ←
+          </button>
 
-</div>
+          <div class="products-row" id="saleProducts"></div>
 
-<!-- PRODUCTO 7 -->
-<div class="card">
+          <button class="scroll-btn scroll-right" data-target="saleProducts">
+            →
+          </button>
 
-<div class="imagen">
-<img src="img/producto7.jpg" alt="Beauty Walfor Cemento 450">
-</div>
+        </div>
 
-<div class="info">
+      </div>
 
-<div class="nombre">Gel Fijador Premium Cemento 450 g - Beauty Walfor</div>
+    </section>
 
-<div class="descripcion">Máxima fijación para peinados exigentes.</div>
+    <!-- =========================
+         PRODUCT CATALOG
+    ========================== -->
 
-<div class="precio">$6.700</div>
+    <section id="productos">
 
-<div class="cantidad">
-<button onclick="restar(6)">−</button>
-<span id="cant6">1</span>
-<button onclick="sumar(6)">+</button>
-</div>
+      <div class="container">
 
-<button class="agregar" onclick="agregarCarrito(6)">
-Agregar al carrito
-</button>
+        <div class="section-header">
+          <div>
+            <h2>Todos los productos</h2>
+            <p id="catalogResultText">Explorá nuestro catálogo.</p>
+          </div>
+        </div>
 
-</div>
+        <div class="catalog-tools">
 
-</div>
-<!-- PRODUCTO 8 -->
-<div class="card">
+          <select class="filter-control" id="categoryFilter">
+            <option value="">Todas las categorías</option>
+          </select>
 
-<div class="imagen">
-<img src="img/producto8.jpg" alt="Beauty Walfor Cemento 900">
-</div>
+          <select class="filter-control" id="priceFilter">
+            <option value="">Todos los precios</option>
+            <option value="0-20000">Hasta $20.000</option>
+            <option value="20000-40000">$20.000 - $40.000</option>
+            <option value="40000-999999999">Más de $40.000</option>
+          </select>
 
-<div class="info">
+          <select class="filter-control" id="stockFilter">
+            <option value="">Disponibilidad</option>
+            <option value="available">Disponibles</option>
+            <option value="sale">En oferta</option>
+            <option value="low">Últimas unidades</option>
+          </select>
 
-<div class="nombre">
-Gel Fijador Premium Cemento 900 g - Beauty Walfor
-</div>
+          <select class="filter-control" id="sortFilter">
+            <option value="">Ordenar</option>
+            <option value="newest">Más recientes</option>
+            <option value="price-low">Precio menor a mayor</option>
+            <option value="price-high">Precio mayor a menor</option>
+            <option value="name">Nombre A-Z</option>
+          </select>
 
-<div class="descripcion">
-Máxima fijación para uso profesional.
-</div>
+        </div>
 
-<div class="precio">$12.000</div>
+        <div class="catalog-grid" id="catalogGrid"></div>
 
-<div class="cantidad">
-<button onclick="restar(7)">−</button>
-<span id="cant7">1</span>
-<button onclick="sumar(7)">+</button>
-</div>
+      </div>
 
-<button class="agregar" onclick="agregarCarrito(7)">
-Agregar al carrito
-</button>
+    </section>
 
-</div>
+    <!-- =========================
+         CÓMO COMPRAR
+    ========================== -->
 
-</div>
+    <section id="como-comprar">
 
-<!-- PRODUCTO 9 -->
+      <div class="container">
 
-<div class="card">
+        <div class="section-header">
+          <div>
+            <h2>¿Cómo comprar?</h2>
+            <p>Comprar es rápido y sencillo.</p>
+          </div>
+        </div>
 
-<div class="imagen">
-<img src="img/producto9.jpg" alt="Hair Fix 900">
-</div>
+        <div class="steps">
 
-<div class="info">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div>
+              <strong>Elegí tus productos</strong>
+              <p>Seleccioná el producto, cantidad y variantes disponibles.</p>
+            </div>
+          </div>
 
-<div class="nombre">
-Gel Fijador Premium Hair Fix 900 g - Beauty Walfor
-</div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div>
+              <strong>Agregalos al carrito</strong>
+              <p>Presioná "Agregar al carrito".</p>
+            </div>
+          </div>
 
-<div class="descripcion">
-Ideal para trenzas y peinados de larga duración.
-</div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div>
+              <strong>Revisá tu pedido</strong>
+              <p>Verificá cantidades, variantes y subtotal.</p>
+            </div>
+          </div>
 
-<div class="precio">$12.000</div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <div>
+              <strong>Elegí cómo recibirlo</strong>
+              <p>Seleccioná retiro o envío a domicilio.</p>
+            </div>
+          </div>
 
-<div class="cantidad">
-<button onclick="restar(8)">−</button>
-<span id="cant8">1</span>
-<button onclick="sumar(8)">+</button>
-</div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <div>
+              <strong>Completá tus datos</strong>
+              <p>Ingresá nombre, apellido, correo y teléfono.</p>
+            </div>
+          </div>
 
-<button class="agregar" onclick="agregarCarrito(8)">
-Agregar al carrito
-</button>
+          <div class="step">
+            <div class="step-number">6</div>
+            <div>
+              <strong>Elegí el medio de pago</strong>
+              <p>Seleccioná la opción disponible.</p>
+            </div>
+          </div>
 
-</div>
+          <div class="step">
+            <div class="step-number">7</div>
+            <div>
+              <strong>Realizá el pago</strong>
+              <p>Completá el proceso correspondiente.</p>
+            </div>
+          </div>
 
-</div>
+          <div class="step">
+            <div class="step-number">8</div>
+            <div>
+              <strong>¡Listo!</strong>
+              <p>Recibirás la confirmación de tu pedido.</p>
+            </div>
+          </div>
 
-<!-- PRODUCTO 10 -->
+        </div>
 
-<div class="card">
+      </div>
 
-<div class="imagen">
-<img src="img/producto10.jpg" alt="Shine Jam 113">
-</div>
+    </section>
 
-<div class="info">
+    <!-- =========================
+         ENVIOS / PAGOS
+    ========================== -->
 
-<div class="nombre">
-Shine Jam Conditioning Gel x 113 g
-</div>
+    <section id="envios">
 
-<div class="descripcion">
-Especial para realizar trenzas con excelente acabado.
-</div>
+      <div class="container">
 
-<div class="precio">$5.600</div>
+        <div class="section-header">
+          <div>
+            <h2>Envíos</h2>
+            <p>Información sobre las modalidades de entrega.</p>
+          </div>
+        </div>
 
-<div class="cantidad">
-<button onclick="restar(9)">−</button>
-<span id="cant9">1</span>
-<button onclick="sumar(9)">+</button>
-</div>
+        <div class="info-grid">
 
-<button class="agregar" onclick="agregarCarrito(9)">
-Agregar al carrito
-</button>
+          <div class="info-card">
+            <div class="info-icon">🏠</div>
+            <h3>Retiro</h3>
+            <p>
+              Retirá tu pedido en nuestro local ficticio.
+              Coordinaremos día y horario una vez confirmado.
+            </p>
+          </div>
 
-</div>
+          <div class="info-card">
+            <div class="info-icon">🏍️</div>
+            <h3>Envío local</h3>
+            <p>
+              Realizamos envíos mediante moto-mandado.
+              El costo depende de la ubicación.
+            </p>
+          </div>
 
-</div>
+          <div class="info-card">
+            <div class="info-icon">📦</div>
+            <h3>Interior / País</h3>
+            <p>
+              Consultá las modalidades disponibles para otras localidades.
+            </p>
+          </div>
 
-<!-- PRODUCTO 11 -->
+        </div>
 
-<div class="card">
+      </div>
 
-<div class="imagen">
-<img src="img/producto11.jpg" alt="Shine Jam 227">
-</div>
+    </section>
 
-<div class="info">
+    <section id="pagos">
 
-<div class="nombre">
-Shine Jam Conditioning Gel x 227 g
-</div>
+      <div class="container">
 
-<div class="descripcion">
-Mayor contenido para uso frecuente.
-</div>
+        <div class="section-header">
+          <div>
+            <h2>Medios de pago</h2>
+            <p>Elegí la modalidad disponible.</p>
+          </div>
+        </div>
 
-<div class="precio">$9.000</div>
+        <div class="info-grid">
 
-<div class="cantidad">
-<button onclick="restar(10)">−</button>
-<span id="cant10">1</span>
-<button onclick="sumar(10)">+</button>
-</div>
+          <div class="info-card">
+            <div class="info-icon">💳</div>
+            <h3>Tarjetas</h3>
+            <p>
+              Crédito y débito mediante la plataforma de pago habilitada.
+            </p>
+          </div>
 
-<button class="agregar" onclick="agregarCarrito(10)">
-Agregar al carrito
-</button>
+          <div class="info-card">
+            <div class="info-icon">📱</div>
+            <h3>Mercado Pago</h3>
+            <p>
+              Pago online mediante Mercado Pago cuando se encuentre conectado.
+            </p>
+          </div>
 
-</div>
+          <div class="info-card">
+            <div class="info-icon">🏦</div>
+            <h3>Transferencia</h3>
+            <p>
+              También podés pagar mediante transferencia bancaria.
+            </p>
+          </div>
 
-</div>
+        </div>
 
-<!-- PRODUCTO 12 -->
+      </div>
 
-<div class="card">
+    </section>
 
-<div class="imagen">
-<img src="img/producto12.jpg" alt="Durag Deluxe">
-</div>
+    <!-- =========================
+         LOCATION
+    ========================== -->
 
-<div class="info">
+    <section id="ubicacion">
 
-<div class="nombre">
-Gorro de Satén DU-RAG Deluxe
-</div>
+      <div class="container">
 
-<div class="descripcion">
-Protege tus trenzas y ayuda a mantener el peinado por más tiempo.
-</div>
+        <div class="section-header">
+          <div>
+            <h2>¿Dónde estamos?</h2>
+            <p>Visitá nuestro local.</p>
+          </div>
+        </div>
 
-<div class="precio">$4.800</div>
+        <div class="contact-box">
 
-<div class="cantidad">
-<button onclick="restar(11)">−</button>
-<span id="cant11">1</span>
-<button onclick="sumar(11)">+</button>
-</div>
+          <div class="contact-main">
 
-<button class="agregar" onclick="agregarCarrito(11)">
-Agregar al carrito
-</button>
+            <h3 id="locationBusinessName">
+              Tienda Urban
+            </h3>
 
-</div>
+            <p id="locationAddress">
+              Calle Ficticia 123, Formosa Capital
+            </p>
 
-</div>
+            <p id="locationHours">
+              Lunes a sábado de 09:00 a 20:00 hs.
+            </p>
 
-</div>
+            <br>
 
-<!-- Fin del catálogo -->
-</div>
+            <a
+              href="#"
+              target="_blank"
+              class="btn btn-primary"
+              id="mapsLink"
+            >
+              📍 ABRIR EN GOOGLE MAPS
+            </a>
 
-<div id="carrito">
+          </div>
 
-<h2>🛒 Mi carrito <span class="contador" id="contador">0</span></h2>
+          <div class="map-box">
 
-<div id="listaCarrito">
+            <div class="map-placeholder">
 
-<p style="text-align:center;color:#666;">
-Tu carrito está vacío.
-</p>
+              <div>
+                <div style="font-size:45px;">📍</div>
+                <strong>Ubicación del negocio</strong>
+                <p>
+                  Podés reemplazar este bloque por Google Maps.
+                </p>
+              </div>
 
-</div>
+            </div>
 
-<div class="total">
-Total: $<span id="total">0</span>
-</div>
+          </div>
 
-<button class="finalizar" onclick="enviarWhatsApp()">
-📲 Enviar pedido por WhatsApp
-</button>
+        </div>
 
-</div>
+      </div>
 
-<script>
+    </section>
 
-// AQUÍ VA TODO EL CÓDIGO JAVASCRIPT
-// (sumar, restar, agregarCarrito, actualizarCarrito,
-// LocalStorage, buscador, etc.)
+    <!-- =========================
+         CONTACT
+    ========================== -->
 
-function enviarWhatsApp(){
+    <section id="contacto">
 
-const numero="5493705141113";
+      <div class="container">
 
-let mensaje="Hola, este es mi pedido:%0A%0A";
+        <div class="section-header">
+          <div>
+            <h2>Contacto</h2>
+            <p>Estamos para ayudarte.</p>
+          </div>
+        </div>
 
-window.open("https://wa.me/"+numero+"?text="+mensaje,"_blank");
+        <div class="contact-box">
 
-}
+          <div class="contact-main">
 
-</script>
+            <h3>Seguinos en Instagram</h3>
+
+            <p id="instagramHandle">
+              @tienda.ficticia
+            </p>
+
+            <div class="contact-links">
+
+              <a href="#" id="whatsappLink" class="contact-link" target="_blank">
+                💬 WhatsApp
+              </a>
+
+              <a href="#" id="instagramLink" class="contact-link" target="_blank">
+                📸 Instagram
+              </a>
+
+              <a href="#" id="facebookLink" class="contact-link" target="_blank">
+                📘 Facebook
+              </a>
+
+              <a href="#" id="tiktokLink" class="contact-link" target="_blank">
+                🎵 TikTok
+              </a>
+
+              <a href="#" id="emailLink" class="contact-link">
+                ✉️ Email
+              </a>
+
+            </div>
+
+          </div>
+
+          <div class="map-box">
+
+            <h3>¿Necesitás ayuda?</h3>
+
+            <p style="color:var(--text-secondary);margin-top:8px;">
+              Si tenés alguna consulta sobre productos, pagos, envíos o tu pedido,
+              comunicate con nosotros.
+            </p>
+
+            <br>
+
+            <a href="#" class="btn btn-primary" id="contactWhatsappBtn" target="_blank">
+              HABLAR POR WHATSAPP
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div>
+
+          <div class="logo-area" style="justify-content:flex-start;">
+            <div class="logo">TU</div>
+            <span id="footerStoreName">Tienda Urban</span>
+          </div>
+
+          <br>
+
+          <p>
+            Todo lo que buscás, en un solo lugar.
+          </p>
+
+        </div>
+
+        <div>
+
+          <h3>Comprar</h3>
+
+          <div class="footer-links">
+            <a href="#productos">Productos</a>
+            <a href="#categorias">Categorías</a>
+            <a href="#ofertas">Ofertas</a>
+            <a href="#novedades">Novedades</a>
+          </div>
+
+        </div>
+
+        <div>
+
+          <h3>Información</h3>
+
+          <div class="footer-links">
+            <a href="#como-comprar">Cómo comprar</a>
+            <a href="#envios">Envíos</a>
+            <a href="#pagos">Medios de pago</a>
+            <a href="#ubicacion">Ubicación</a>
+          </div>
+
+        </div>
+
+        <div>
+
+          <h3>Contacto</h3>
+
+          <div class="footer-links">
+            <a href="#contacto">WhatsApp</a>
+            <a href="#contacto">Instagram</a>
+            <a href="#contacto">Facebook</a>
+            <a href="#contacto">Email</a>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="copyright">
+        © <span id="currentYear">2026</span>
+        <span id="copyrightName">Tienda Urban</span>.
+        Todos los derechos reservados.
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- =========================
+       CART DRAWER
+  ========================== -->
+
+  <aside class="cart-drawer" id="cartDrawer">
+
+    <div class="drawer-header">
+
+      <div>
+        <strong>Tu carrito</strong>
+        <div style="font-size:12px;color:var(--text-secondary);">
+          Revisá tu pedido
+        </div>
+      </div>
+
+      <button class="drawer-close" id="cartClose">×</button>
+
+    </div>
+
+    <div class="cart-items" id="cartItems"></div>
+
+    <div class="cart-summary">
+
+      <div class="summary-line">
+        <span>Subtotal de productos</span>
+        <strong id="cartSubtotal">$0</strong>
+      </div>
+
+      <div class="delivery-selector">
+
+        <label class="delivery-option">
+          <input type="radio" name="delivery" value="pickup" checked>
+          Retiro
+        </label>
+
+        <label class="delivery-option">
+          <input type="radio" name="delivery" value="shipping">
+          Envío a domicilio
+        </label>
+
+      </div>
+
+      <div class="shipping-note" id="shippingNote">
+        El costo del envío será informado antes de confirmar la entrega.
+      </div>
+
+      <div class="summary-line summary-total">
+        <span>Total</span>
+        <strong id="cartTotal">$0</strong>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="checkoutBtn">
+        INICIAR COMPRA
+      </button>
+
+    </div>
+
+  </aside>
+
+  <!-- =========================
+       PRODUCT MODAL
+  ========================== -->
+
+  <div class="modal" id="productModal">
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <h2>Producto</h2>
+
+        <button class="modal-close" data-close="productModal">
+          ×
+        </button>
+
+      </div>
+
+      <div id="productDetail"></div>
+
+    </div>
+
+  </div>
+
+  <!-- =========================
+       CHECKOUT MODAL
+  ========================== -->
+
+  <div class="modal" id="checkoutModal">
+
+    <div class="modal-content modal-large">
+
+      <div class="modal-header">
+
+        <h2>Finalizar compra</h2>
+
+        <button class="modal-close" data-close="checkoutModal">
+          ×
+        </button>
+
+      </div>
+
+      <div class="checkout-steps">
+        <div class="checkout-step active" data-checkstep="1"></div>
+        <div class="checkout-step" data-checkstep="2"></div>
+        <div class="checkout-step" data-checkstep="3"></div>
+      </div>
+
+      <!-- STEP 1 -->
+
+      <div class="checkout-panel active" id="checkoutStep1">
+
+        <h3>Datos del cliente</h3>
+
+        <p style="color:var(--text-secondary);font-size:13px;margin:5px 0 20px;">
+          Completá tus datos para poder identificar tu pedido.
+        </p>
+
+        <form id="customerForm">
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Nombre *</label>
+              <input
+                class="form-control"
+                id="customerFirstName"
+                required
+                autocomplete="given-name"
+              >
+            </div>
+
+            <div class="form-group">
+              <label>Apellido *</label>
+              <input
+                class="form-control"
+                id="customerLastName"
+                required
+                autocomplete="family-name"
+              >
+            </div>
+
+            <div class="form-group">
+              <label>Correo electrónico *</label>
+              <input
+                type="email"
+                class="form-control"
+                id="customerEmail"
+                required
+                autocomplete="email"
+              >
+            </div>
+
+            <div class="form-group">
+              <label>Teléfono / WhatsApp *</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="customerPhone"
+                required
+                autocomplete="tel"
+              >
+            </div>
+
+          </div>
+
+          <div class="checkout-buttons">
+
+            <button type="button" class="btn btn-secondary" data-close="checkoutModal">
+              CANCELAR
+            </button>
+
+            <button type="submit" class="btn btn-primary">
+              CONTINUAR
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+      <!-- STEP 2 -->
+
+      <div class="checkout-panel" id="checkoutStep2">
+
+        <h3>Datos de entrega</h3>
+
+        <p style="color:var(--text-secondary);font-size:13px;margin:5px 0 20px;">
+          Elegí cómo querés recibir tu compra.
+        </p>
+
+        <div class="delivery-selector">
+
+          <label class="delivery-option">
+            <input type="radio" name="checkoutDelivery" value="pickup">
+            Retiro en el local
+          </label>
+
+          <label class="delivery-option">
+            <input type="radio" name="checkoutDelivery" value="shipping">
+            Envío a domicilio
+          </label>
+
+        </div>
+
+        <div id="pickupInfo" class="order-review">
+
+          <strong>Datos para retiro</strong>
+
+          <p style="color:var(--text-secondary);font-size:13px;margin-top:8px;">
+            Calle Ficticia 123, Formosa Capital.<br>
+            Lunes a sábado de 09:00 a 20:00 hs.
+          </p>
+
+        </div>
+
+        <div id="shippingForm" style="display:none;">
+
+          <div class="form-grid">
+
+            <div class="form-group">
+              <label>Dirección *</label>
+              <input class="form-control" id="shippingAddress">
+            </div>
+
+            <div class="form-group">
+              <label>Número *</label>
+              <input class="form-control" id="shippingNumber">
+            </div>
+
+            <div class="form-group">
+              <label>Barrio *</label>
+              <input class="form-control" id="shippingNeighborhood">
+            </div>
+
+            <div class="form-group">
+              <label>Ciudad / Localidad *</label>
+              <input class="form-control" id="shippingCity">
+            </div>
+
+            <div class="form-group">
+              <label>Código postal</label>
+              <input class="form-control" id="shippingPostal">
+            </div>
+
+            <div class="form-group">
+              <label>Referencia</label>
+              <input class="form-control" id="shippingReference">
+            </div>
+
+            <div class="form-group full">
+              <label>Información adicional</label>
+              <textarea
+                class="form-control"
+                id="shippingExtra"
+                placeholder="Ejemplo: casa con rejas negras."
+              ></textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="checkout-buttons">
+
+          <button class="btn btn-secondary" id="backToStep1">
+            ← VOLVER
+          </button>
+
+          <button class="btn btn-primary" id="goToStep3">
+            CONTINUAR
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- STEP 3 -->
+
+      <div class="checkout-panel" id="checkoutStep3">
+
+        <h3>Pago y confirmación</h3>
+
+        <p style="color:var(--text-secondary);font-size:13px;margin:5px 0 20px;">
+          Revisá todos los datos antes de confirmar.
+        </p>
+
+        <div class="order-review" id="orderReview"></div>
+
+        <h4 style="margin-bottom:10px;">
+          Medio de pago
+        </h4>
+
+        <div class="payment-options">
+
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="mercadopago">
+            📱 Mercado Pago
+          </label>
+
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="transfer">
+            🏦 Transferencia bancaria
+          </label>
+
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="cash">
+            💵 Efectivo
+          </label>
+
+        </div>
+
+        <div class="bank-data" id="bankData">
+
+          <strong>Datos bancarios ficticios</strong>
+
+          <br><br>
+
+          Banco Ficticio<br>
+          Titular: Tienda Urban S.A.<br>
+          CBU: 0000000000000000000000<br>
+          Alias: tienda.urban.ficticia<br>
+          CUIT: 30-00000000-0
+
+        </div>
+
+        <div class="receipt-box">
+
+          <strong>Comprobante de pago</strong>
+
+          <p style="color:var(--text-secondary);font-size:12px;margin-top:5px;">
+            Si tu medio de pago requiere comprobante, podés adjuntarlo.
+          </p>
+
+          <input
+            type="file"
+            id="receiptFile"
+            accept="image/*,.pdf"
+          >
+
+        </div>
+
+        <div class="checkout-buttons">
+
+          <button class="btn btn-secondary" id="backToStep2">
+            ← VOLVER
+          </button>
+
+          <button class="btn btn-primary" id="confirmOrderBtn">
+            CONFIRMAR Y PAGAR
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =========================
+       SUCCESS MODAL
+  ========================== -->
+
+  <div class="modal" id="successModal">
+
+    <div class="modal-content">
+
+      <div class="success">
+
+        <div class="success-icon">
+          ✓
+        </div>
+
+        <h2>¡Compra realizada correctamente!</h2>
+
+        <div class="order-number" id="successOrderNumber">
+          PEDIDO #000123
+        </div>
+
+        <div class="order-review" id="successDetails"></div>
+
+        <p style="color:var(--text-secondary);font-size:13px;margin-bottom:20px;">
+          Guardá tu número de pedido para futuras consultas.
+        </p>
+
+        <div style="display:grid;gap:10px;">
+
+          <button class="btn btn-primary btn-block" id="sendWhatsappBtn">
+            💬 ENVIAR PEDIDO POR WHATSAPP
+          </button>
+
+          <button class="btn btn-secondary btn-block" id="closeSuccessBtn">
+            FINALIZAR
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- TOAST -->
+
+  <div class="toast-container" id="toastContainer"></div>
+
+
+  <script>
+
+    /* =========================================================
+       CONFIGURACIÓN DE LA TIENDA
+       =========================================================
+
+       ESTA ES LA PARTE QUE PODÉS MODIFICAR FÁCILMENTE.
+
+       Todos los datos actuales son FICTICIOS.
+    ========================================================= */
+
+    const STORE = {
+
+      name: "Tienda Urban",
+
+      shortName: "TU",
+
+      description:
+        "Todo lo que buscás, en un solo lugar.",
+
+      phone:
+        "3700000000",
+
+      whatsapp:
+        "5493700000000",
+
+      email:
+        "contacto@tiendaurban-ficticia.com",
+
+      instagram:
+        "tienda.ficticia",
+
+      instagramUrl:
+        "https://instagram.com/tienda.ficticia",
+
+      facebookUrl:
+        "https://facebook.com/tienda.ficticia",
+
+      tiktokUrl:
+        "https://tiktok.com/@tienda.ficticia",
+
+      address:
+        "Calle Ficticia 123, Formosa Capital, Argentina",
+
+      hours:
+        "Lunes a sábado de 09:00 a 20:00 hs.",
+
+      mapsUrl:
+        "https://www.google.com/maps/search/?api=1&query=Calle+Ficticia+123+Formosa",
+
+      currency:
+        "$",
+
+      shippingMessage:
+        "El costo del envío será informado antes de confirmar la entrega.",
+
+      lowStockLimit:
+        5
+
+    };
+
+
+    /* =========================================================
+       CATEGORÍAS
+    ========================================================= */
+
+    const CATEGORIES = [
+
+      {
+        id: "remeras",
+        name: "Remeras",
+        icon: "👕"
+      },
+
+      {
+        id: "pantalones",
+        name: "Pantalones",
+        icon: "👖"
+      },
+
+      {
+        id: "shorts",
+        name: "Shorts",
+        icon: "🩳"
+      },
+
+      {
+        id: "camperas",
+        name: "Camperas",
+        icon: "🧥"
+      },
+
+      {
+        id: "accesorios",
+        name: "Accesorios",
+        icon: "👜"
+      }
+
+    ];
+
+
+    /* =========================================================
+       PRODUCTOS
+    =========================================================
+
+       Para agregar productos nuevos simplemente copiá uno
+       de estos objetos y modificá sus datos.
+
+    ========================================================= */
+
+    const PRODUCTS = [
+
+      {
+        id: 1,
+        name: "Remera Urban",
+        category: "remeras",
+        description: "Remera de algodón premium de corte moderno.",
+        price: 25000,
+        oldPrice: 30000,
+        stock: 20,
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["Negro", "Blanco", "Gris"],
+        image:
+          "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=700&q=85",
+        featured: true,
+        newest: true,
+        bestSeller: true,
+        sale: true
+      },
+
+      {
+        id: 2,
+        name: "Remera Basic",
+        category: "remeras",
+        description: "Modelo básico para todos los días.",
+        price: 22000,
+        oldPrice: null,
+        stock: 15,
+        sizes: ["S", "M", "L"],
+        colors: ["Negro", "Blanco"],
+        image:
+          "https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=700&q=85",
+        featured: true,
+        newest: true,
+        bestSeller: false,
+        sale: false
+      },
+
+      {
+        id: 3,
+        name: "Pantalón Street",
+        category: "pantalones",
+        description: "Pantalón urbano cómodo y versátil.",
+        price: 42000,
+        oldPrice: 48000,
+        stock: 8,
+        sizes: ["36", "38", "40", "42", "44"],
+        colors: ["Negro", "Azul"],
+        image:
+          "https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&w=700&q=85",
+        featured: true,
+        newest: false,
+        bestSeller: true,
+        sale: true
+      },
+
+      {
+        id: 4,
+        name: "Short Basic",
+        category: "shorts",
+        description: "Short liviano y cómodo.",
+        price: 18000,
+        oldPrice: null,
+        stock: 12,
+        sizes: ["S", "M", "L", "XL"],
+        colors: ["Negro", "Gris"],
+        image:
+          "https://images.unsplash.com/photo-1591195853828-11db59a44f6b?auto=format&fit=crop&w=700&q=85",
+        featured: true,
+        newest: false,
+        bestSeller: true,
+        sale: false
+      },
+
+      {
+        id: 5,
+        name: "Campera Urban",
+        category: "camperas",
+        description: "Campera urbana para media estación.",
+        price: 65000,
+        oldPrice: 75000,
+        stock: 4,
+        sizes: ["S", "M", "L"],
+        colors: ["Negro", "Verde"],
+        image:
+          "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=85",
+        featured: true,
+        newest: true,
+        bestSeller: true,
+        sale: true
+      },
+
+      {
+        id: 6,
+        name: "Gorra Urban",
+        category: "accesorios",
+        description: "Gorra ajustable con diseño minimalista.",
+        price: 15000,
+        oldPrice: null,
+        stock: 25,
+        sizes: [],
+        colors: ["Negro", "Beige"],
+        image:
+          "https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=700&q=85",
+        featured: true,
+        newest: true,
+        bestSeller: false,
+        sale: false
+      },
+
+      {
+        id: 7,
+        name: "Riñonera Street",
+        category: "accesorios",
+        description: "Riñonera compacta para uso diario.",
+        price: 20000,
+        oldPrice: 24000,
+        stock: 7,
+        sizes: [],
+        colors: ["Negro"],
+        image:
+          "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=700&q=85",
+        featured: false,
+        newest: false,
+        bestSeller: true,
+        sale: true
+      },
+
+      {
+        id: 8,
+        name: "Pantalón Cargo",
+        category: "pantalones",
+        description: "Cargo amplio con múltiples bolsillos.",
+        price: 47000,
+        oldPrice: null,
+        stock: 10,
+        sizes: ["38", "40", "42", "44"],
+        colors: ["Negro", "Beige"],
+        image:
+          "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=700&q=85",
+        featured: false,
+        newest: true,
+        bestSeller: false,
+        sale: false
+      }
+
+    ];
+
+
+    /* =========================================================
+       ESTADO DE LA TIENDA
+    ========================================================= */
+
+    let cart = JSON.parse(localStorage.getItem("urban_cart")) || [];
+
+    let selectedProduct = null;
+
+    let selectedVariants = {
+      size: "",
+      color: ""
+    };
+
+    let checkoutStep = 1;
+
+    let customerData = {};
+
+    let deliveryMethod =
+      localStorage.getItem("urban_delivery") || "pickup";
+
+    let lastOrder = null;
+
+
+    /* =========================================================
+       ELEMENTOS
+    ========================================================= */
+
+    const $ = (selector) =>
+      document.querySelector(selector);
+
+    const $$ = (selector) =>
+      document.querySelectorAll(selector);
+
+
+    /* =========================================================
+       FORMATEAR PRECIO
+    ========================================================= */
+
+    function money(value) {
+
+      return STORE.currency +
+        Number(value).toLocaleString("es-AR");
+
+    }
+
+
+    /* =========================================================
+       CATEGORÍA
+    ========================================================= */
+
+    function getCategoryName(id) {
+
+      const category = CATEGORIES.find(
+        category => category.id === id
+      );
+
+      return category
+        ? category.name
+        : id;
+
+    }
+
+
+    /* =========================================================
+       GUARDAR CARRITO
+    ========================================================= */
+
+    function saveCart() {
+
+      localStorage.setItem(
+        "urban_cart",
+        JSON.stringify(cart)
+      );
+
+    }
+
+
+    /* =========================================================
+       TOAST
+    ========================================================= */
+
+    function showToast(message) {
+
+      const container = $("#toastContainer");
+
+      const toast = document.createElement("div");
+
+      toast.className = "toast";
+
+      toast.textContent = message;
+
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.remove();
+      }, 2800);
+
+    }
+
+
+    /* =========================================================
+       RENDER CATEGORÍAS
+    ========================================================= */
+
+    function renderCategories() {
+
+      const grid = $("#categoriesGrid");
+
+      const menu = $("#menuCategories");
+
+      grid.innerHTML = "";
+
+      menu.innerHTML = "";
+
+      CATEGORIES.forEach(category => {
+
+        const card = document.createElement("button");
+
+        card.className = "category-card";
+
+        card.innerHTML = `
+          <div class="category-icon">
+            ${category.icon}
+          </div>
+
+          <strong>${category.name}</strong>
+
+          <span>
+            Ver productos
+          </span>
+        `;
+
+        card.addEventListener("click", () => {
+
+          $("#categoryFilter").value =
+            category.id;
+
+          renderCatalog();
+
+          document
+            .querySelector("#productos")
+            .scrollIntoView();
+
+        });
+
+        grid.appendChild(card);
+
+
+        const menuLink =
+          document.createElement("a");
+
+        menuLink.href = "#productos";
+
+        menuLink.className = "menu-category";
+
+        menuLink.innerHTML = `
+          <span>${category.name}</span>
+          <span>→</span>
+        `;
+
+        menuLink.addEventListener("click", () => {
+
+          $("#categoryFilter").value =
+            category.id;
+
+          renderCatalog();
+
+          closeMenu();
+
+        });
+
+        menu.appendChild(menuLink);
+
+      });
+
+      const filter =
+        $("#categoryFilter");
+
+      CATEGORIES.forEach(category => {
+
+        const option =
+          document.createElement("option");
+
+        option.value = category.id;
+
+        option.textContent =
+          category.name;
+
+        filter.appendChild(option);
+
+      });
+
+    }
+
+
+    /* =========================================================
+       PRODUCT CARD
+    ========================================================= */
+
+    function productCard(product) {
+
+      const soldOut =
+        product.stock <= 0;
+
+      const lowStock =
+        product.stock > 0 &&
+        product.stock <= STORE.lowStockLimit;
+
+      const discount =
+        product.oldPrice
+          ? Math.round(
+              (1 - product.price / product.oldPrice) * 100
+            )
+          : 0;
+
+      return `
+
+        <article
+          class="product-card ${soldOut ? "out-of-stock" : ""}"
+        >
+
+          <div
+            class="product-image"
+            onclick="openProduct(${product.id})"
+            style="cursor:pointer;"
+          >
+
+            ${
+              product.sale
+                ? `<span class="badge badge-sale">
+                    -${discount}%
+                   </span>`
+                : ""
+            }
+
+            ${
+              soldOut
+                ? `<span class="badge badge-sale">
+                    AGOTADO
+                   </span>`
+                : ""
+            }
+
+            ${
+              lowStock
+                ? `<span class="badge badge-stock">
+                    Últimas unidades
+                   </span>`
+                : ""
+            }
+
+            <img
+              src="${product.image}"
+              alt="${product.name}"
+              loading="lazy"
+            >
+
+          </div>
+
+          <div class="product-info">
+
+            <div class="product-category">
+              ${getCategoryName(product.category)}
+            </div>
+
+            <h3 class="product-name">
+              ${product.name}
+            </h3>
+
+            <p class="product-description">
+              ${product.description}
+            </p>
+
+            <div class="price-row">
+
+              <span class="price">
+                ${money(product.price)}
+              </span>
+
+              ${
+                product.oldPrice
+                  ? `<span class="old-price">
+                      ${money(product.oldPrice)}
+                     </span>`
+                  : ""
+              }
+
+            </div>
+
+            <button
+              class="btn ${
+                soldOut
+                  ? "btn-secondary"
+                  : "btn-primary"
+              } btn-block"
+              ${
+                soldOut
+                  ? "disabled"
+                  : `onclick="openProduct(${product.id})"`
+              }
+            >
+              ${
+                soldOut
+                  ? "AGOTADO"
+                  : "VER PRODUCTO"
+              }
+            </button>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }
+
+
+    /* =========================================================
+       RENDER PRODUCTOS
+    ========================================================= */
+
+    function renderProducts() {
+
+      $("#newProducts").innerHTML =
+        PRODUCTS
+          .filter(p => p.newest)
+          .map(productCard)
+          .join("");
+
+      $("#bestProducts").innerHTML =
+        PRODUCTS
+          .filter(p => p.bestSeller)
+          .map(productCard)
+          .join("");
+
+      $("#saleProducts").innerHTML =
+        PRODUCTS
+          .filter(p => p.sale)
+          .map(productCard)
+          .join("");
+
+    }
+
+
+    /* =========================================================
+       CATÁLOGO
+    ========================================================= */
+
+    function renderCatalog() {
+
+      let products = [...PRODUCTS];
+
+      const search =
+        $("#searchInput").value
+          .trim()
+          .toLowerCase();
+
+      const category =
+        $("#categoryFilter").value;
+
+      const price =
+        $("#priceFilter").value;
+
+      const stock =
+        $("#stockFilter").value;
+
+      const sort =
+        $("#sortFilter").value;
+
+
+      if (search) {
+
+        products =
+          products.filter(product => {
+
+            const text =
+              `
+              ${product.name}
+              ${product.description}
+              ${getCategoryName(product.category)}
+              ${(product.colors || []).join(" ")}
+              ${(product.sizes || []).join(" ")}
+              `.toLowerCase();
+
+            return text.includes(search);
+
+          });
+
+      }
+
+
+      if (category) {
+
+        products =
+          products.filter(
+            product =>
+              product.category === category
+          );
+
+      }
+
+
+      if (price) {
+
+        const [min, max] =
+          price.split("-").map(Number);
+
+        products =
+          products.filter(
+            product =>
+              product.price >= min &&
+              product.price <= max
+          );
+
+      }
+
+
+      if (stock === "available") {
+
+        products =
+          products.filter(
+            product => product.stock > 0
+          );
+
+      }
+
+
+      if (stock === "sale") {
+
+        products =
+          products.filter(
+            product => product.sale
+          );
+
+      }
+
+
+      if (stock === "low") {
+
+        products =
+          products.filter(
+            product =>
+              product.stock > 0 &&
+              product.stock <= STORE.lowStockLimit
+          );
+
+      }
+
+
+      if (sort === "price-low") {
+
+        products.sort(
+          (a,b) => a.price - b.price
+        );
+
+      }
+
+
+      if (sort === "price-high") {
+
+        products.sort(
+          (a,b) => b.price - a.price
+        );
+
+      }
+
+
+      if (sort === "name") {
+
+        products.sort(
+          (a,b) =>
+            a.name.localeCompare(b.name)
+        );
+
+      }
+
+
+      if (sort === "newest") {
+
+        products.sort(
+          (a,b) =>
+            Number(b.newest) - Number(a.newest)
+        );
+
+      }
+
+
+      $("#catalogResultText").textContent =
+        `${products.length} producto${products.length === 1 ? "" : "s"} encontrado${products.length === 1 ? "" : "s"}.`;
+
+
+      $("#catalogGrid").innerHTML =
+        products.length
+          ? products.map(productCard).join("")
+          : `
+            <div
+              style="
+                grid-column:1/-1;
+                padding:50px 20px;
+                text-align:center;
+                color:var(--text-secondary);
+              "
+            >
+              No encontramos productos con esos filtros.
+            </div>
+          `;
+
+    }
+
+
+    /* =========================================================
+       PRODUCTO DETALLE
+    ========================================================= */
+
+    function openProduct(id) {
+
+      const product =
+        PRODUCTS.find(
+          product => product.id === id
+        );
+
+      if (!product) return;
+
+      selectedProduct = product;
+
+      selectedVariants = {
+        size: product.sizes?.[0] || "",
+        color: product.colors?.[0] || ""
+      };
+
+      const discount =
+        product.oldPrice
+          ? Math.round(
+              (1 - product.price / product.oldPrice) * 100
+            )
+          : 0;
+
+
+      $("#productDetail").innerHTML = `
+
+        <div class="product-detail">
+
+          <div>
+
+            <img
+              class="product-detail-image"
+              src="${product.image}"
+              alt="${product.name}"
+            >
+
+          </div>
+
+          <div>
+
+            <div class="product-category">
+              ${getCategoryName(product.category)}
+            </div>
+
+            <h2 style="margin:7px 0;">
+              ${product.name}
+            </h2>
+
+            <p style="color:var(--text-secondary);">
+              ${product.description}
+            </p>
+
+            <div class="price-row" style="margin-top:18px;">
+
+              <span class="price">
+                ${money(product.price)}
+              </span>
+
+              ${
+                product.oldPrice
+                  ? `<span class="old-price">
+                      ${money(product.oldPrice)}
+                     </span>
+
+                     <span
+                       style="
+                         color:var(--danger);
+                         font-size:12px;
+                         font-weight:bold;
+                       "
+                     >
+                       -${discount}%
+                     </span>`
+                  : ""
+              }
+
+            </div>
+
+            <p
+              style="
+                color:${
+                  product.stock <= STORE.lowStockLimit
+                    ? "var(--warning)"
+                    : "var(--success)"
+                };
+                font-size:13px;
+                font-weight:bold;
+              "
+            >
+              ${
+                product.stock <= 0
+                  ? "Agotado"
+                  : product.stock <= STORE.lowStockLimit
+                    ? `Últimas unidades: ${product.stock}`
+                    : `Stock disponible: ${product.stock}`
+              }
+            </p>
+
+            ${
+              product.sizes?.length
+                ? `
+                  <div class="variant-group">
+
+                    <label>Talle</label>
+
+                    <div
+                      class="variant-buttons"
+                      id="sizeVariants"
+                    >
+
+                      ${product.sizes.map(
+                        (size, index) => `
+                          <button
+                            class="variant-btn ${
+                              index === 0
+                                ? "active"
+                                : ""
+                            }"
+                            onclick="selectVariant('size','${size}',this)"
+                          >
+                            ${size}
+                          </button>
+                        `
+                      ).join("")}
+
+                    </div>
+
+                  </div>
+                `
+                : ""
+            }
+
+            ${
+              product.colors?.length
+                ? `
+                  <div class="variant-group">
+
+                    <label>Color</label>
+
+                    <div
+                      class="variant-buttons"
+                      id="colorVariants"
+                    >
+
+                      ${product.colors.map(
+                        (color, index) => `
+                          <button
+                            class="variant-btn ${
+                              index === 0
+                                ? "active"
+                                : ""
+                            }"
+                            onclick="selectVariant('color','${color}',this)"
+                          >
+                            ${color}
+                          </button>
+                        `
+                      ).join("")}
+
+                    </div>
+
+                  </div>
+                `
+                : ""
+            }
+
+            <div style="margin-top:20px;">
+
+              <label
+                style="
+                  display:block;
+                  font-size:13px;
+                  font-weight:bold;
+                  margin-bottom:7px;
+                "
+              >
+                Cantidad
+              </label>
+
+              <div class="quantity-control">
+
+                <button
+                  onclick="changeDetailQuantity(-1)"
+                  type="button"
+                >
+                  −
+                </button>
+
+                <strong id="detailQuantity">
+                  1
+                </strong>
+
+                <button
+                  onclick="changeDetailQuantity(1)"
+                  type="button"
+                >
+                  +
+                </button>
+
+              </div>
+
+            </div>
+
+            <button
+              class="btn btn-primary btn-block"
+              style="margin-top:20px;"
+              ${
+                product.stock <= 0
+                  ? "disabled"
+                  : ""
+              }
+              onclick="addSelectedProduct()"
+            >
+              ${
+                product.stock <= 0
+                  ? "AGOTADO"
+                  : "AGREGAR AL CARRITO"
+              }
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+      $("#productModal").classList.add("active");
+
+    }
+
+
+    let detailQuantity = 1;
+
+
+    function changeDetailQuantity(amount) {
+
+      if (!selectedProduct) return;
+
+      detailQuantity += amount;
+
+      if (detailQuantity < 1)
+        detailQuantity = 1;
+
+      if (detailQuantity > selectedProduct.stock)
+        detailQuantity = selectedProduct.stock;
+
+      $("#detailQuantity").textContent =
+        detailQuantity;
+
+    }
+
+
+    function selectVariant(type, value, button) {
+
+      selectedVariants[type] = value;
+
+      const parent =
+        button.parentElement;
+
+      parent
+        .querySelectorAll(".variant-btn")
+        .forEach(btn =>
+          btn.classList.remove("active")
+        );
+
+      button.classList.add("active");
+
+    }
+
+
+    function addSelectedProduct() {
+
+      if (!selectedProduct) return;
+
+      if (selectedProduct.stock <= 0) {
+
+        showToast("Este producto está agotado.");
+
+        return;
+
+      }
+
+
+      const existing =
+        cart.find(item =>
+          item.productId === selectedProduct.id &&
+          item.size === selectedVariants.size &&
+          item.color === selectedVariants.color
+        );
+
+
+      if (existing) {
+
+        if (
+          existing.quantity +
+          detailQuantity >
+          selectedProduct.stock
+        ) {
+
+          showToast(
+            "No hay suficiente stock disponible."
+          );
+
+          return;
+
+        }
+
+        existing.quantity +=
+          detailQuantity;
+
+      } else {
+
+        cart.push({
+
+          id:
+            Date.now(),
+
+          productId:
+            selectedProduct.id,
+
+          name:
+            selectedProduct.name,
+
+          price:
+            selectedProduct.price,
+
+          image:
+            selectedProduct.image,
+
+          size:
+            selectedVariants.size,
+
+          color:
+            selectedVariants.color,
+
+          quantity:
+            detailQuantity
+
+        });
+
+      }
+
+
+      saveCart();
+
+      renderCart();
+
+      updateCartCount();
+
+      $("#productModal").classList.remove("active");
+
+      detailQuantity = 1;
+
+      showToast(
+        `${selectedProduct.name} agregado al carrito.`
+      );
+
+    }
+
+
+    /* =========================================================
+       CARRITO
+    ========================================================= */
+
+    function getCartSubtotal() {
+
+      return cart.reduce(
+        (total, item) =>
+          total + item.price * item.quantity,
+        0
+      );
+
+    }
+
+
+    function updateCartCount() {
+
+      const count =
+        cart.reduce(
+          (total, item) =>
+            total + item.quantity,
+          0
+        );
+
+      $("#cartCount").textContent =
+        count;
+
+    }
+
+
+    function renderCart() {
+
+      const container =
+        $("#cartItems");
+
+      if (!cart.length) {
+
+        container.innerHTML = `
+
+          <div class="cart-empty">
+
+            <div>
+
+              <div style="font-size:45px;">
+                🛒
+              </div>
+
+              <h3>Tu carrito está vacío</h3>
+
+              <p>
+                Agregá productos para comenzar tu compra.
+              </p>
+
+            </div>
+
+          </div>
+
+        `;
+
+      } else {
+
+        container.innerHTML =
+          cart.map(item => `
+
+            <div class="cart-item">
+
+              <img
+                class="cart-item-img"
+                src="${item.image}"
+                alt="${item.name}"
+              >
+
+              <div>
+
+                <div class="cart-item-name">
+                  ${item.name}
+                </div>
+
+                <div class="cart-item-meta">
+
+                  ${
+                    item.size
+                      ? `Talle: ${item.size}`
+                      : ""
+                  }
+
+                  ${
+                    item.color
+                      ? ` · Color: ${item.color}`
+                      : ""
+                  }
+
+                </div>
+
+                <div class="cart-item-price">
+                  ${money(item.price)} c/u
+                </div>
+
+                <div class="quantity-control">
+
+                  <button
+                    onclick="changeCartQuantity('${item.id}',-1)"
+                  >
+                    −
+                  </button>
+
+                  <strong>
+                    ${item.quantity}
+                  </strong>
+
+                  <button
+                    onclick="changeCartQuantity('${item.id}',1)"
+                  >
+                    +
+                  </button>
+
+                  <button
+                    class="remove-item"
+                    onclick="removeCartItem('${item.id}')"
+                  >
+                    Eliminar
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          `).join("");
+
+      }
+
+
+      const subtotal =
+        getCartSubtotal();
+
+      $("#cartSubtotal").textContent =
+        money(subtotal);
+
+      $("#cartTotal").textContent =
+        money(subtotal);
+
+      updateCartCount();
+
+      updateShippingSelection();
+
+    }
+
+
+    function changeCartQuantity(id, amount) {
+
+      const item =
+        cart.find(
+          item => String(item.id) === String(id)
+        );
+
+      if (!item) return;
+
+      const product =
+        PRODUCTS.find(
+          product => product.id === item.productId
+        );
+
+      const newQuantity =
+        item.quantity + amount;
+
+
+      if (newQuantity <= 0) {
+
+        removeCartItem(id);
+
+        return;
+
+      }
+
+
+      if (
+        product &&
+        newQuantity > product.stock
+      ) {
+
+        showToast(
+          "No hay más unidades disponibles."
+        );
+
+        return;
+
+      }
+
+
+      item.quantity =
+        newQuantity;
+
+      saveCart();
+
+      renderCart();
+
+    }
+
+
+    function removeCartItem(id) {
+
+      cart =
+        cart.filter(
+          item =>
+            String(item.id) !== String(id)
+        );
+
+      saveCart();
+
+      renderCart();
+
+      showToast("Producto eliminado del carrito.");
+
+    }
+
+
+    /* =========================================================
+       DELIVERY
+    ========================================================= */
+
+    function updateShippingSelection() {
+
+      const selected =
+        document.querySelector(
+          'input[name="delivery"]:checked'
+        );
+
+      if (!selected) return;
+
+      deliveryMethod =
+        selected.value;
+
+      localStorage.setItem(
+        "urban_delivery",
+        deliveryMethod
+      );
+
+      $("#shippingNote")
+        .classList.toggle(
+          "show",
+          deliveryMethod === "shipping"
+        );
+
+    }
+
+
+    /* =========================================================
+       CHECKOUT
+    ========================================================= */
+
+    function openCheckout() {
+
+      if (!cart.length) {
+
+        showToast(
+          "Tu carrito está vacío."
+        );
+
+        return;
+
+      }
+
+      $("#cartDrawer")
+        .classList.remove("active");
+
+      $("#checkoutModal")
+        .classList.add("active");
+
+      checkoutStep = 1;
+
+      showCheckoutStep(1);
+
+    }
+
+
+    function showCheckoutStep(step) {
+
+      checkoutStep = step;
+
+      $$(".checkout-panel")
+        .forEach(panel =>
+          panel.classList.remove("active")
+        );
+
+      $(`#checkoutStep${step}`)
+        .classList.add("active");
+
+
+      $$(".checkout-step")
+        .forEach((bar, index) => {
+
+          bar.classList.toggle(
+            "active",
+            index < step
+          );
+
+        });
+
+    }
+
+
+    /* =========================================================
+       CUSTOMER FORM
+    ========================================================= */
+
+    $("#customerForm")
+      .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        customerData = {
+
+          firstName:
+            $("#customerFirstName").value.trim(),
+
+          lastName:
+            $("#customerLastName").value.trim(),
+
+          email:
+            $("#customerEmail").value.trim(),
+
+          phone:
+            $("#customerPhone").value.trim()
+
+        };
+
+        showCheckoutStep(2);
+
+      });
+
+
+    /* =========================================================
+       CHECKOUT DELIVERY
+    ========================================================= */
+
+    $$('input[name="checkoutDelivery"]')
+      .forEach(input => {
+
+        input.addEventListener(
+          "change",
+          function() {
+
+            const shipping =
+              this.value === "shipping";
+
+            $("#shippingForm")
+              .style.display =
+              shipping
+                ? "block"
+                : "none";
+
+            $("#pickupInfo")
+              .style.display =
+              shipping
+                ? "none"
+                : "block";
+
+          }
+        );
+
+      });
+
+
+    $("#backToStep1")
+      .addEventListener(
+        "click",
+        () => showCheckoutStep(1)
+      );
+
+
+    $("#goToStep3")
+      .addEventListener(
+        "click",
+        () => {
+
+          const delivery =
+            document.querySelector(
+              'input[name="checkoutDelivery"]:checked'
+            );
+
+          if (!delivery) {
+
+            showToast(
+              "Seleccioná una modalidad de entrega."
+            );
+
+            return;
+
+          }
+
+
+          if (
+            delivery.value === "shipping"
+          ) {
+
+            const requiredFields = [
+
+              $("#shippingAddress"),
+
+              $("#shippingNumber"),
+
+              $("#shippingNeighborhood"),
+
+              $("#shippingCity")
+
+            ];
+
+
+            const invalid =
+              requiredFields.some(
+                field =>
+                  !field.value.trim()
+              );
+
+
+            if (invalid) {
+
+              showToast(
+                "Completá todos los datos obligatorios de envío."
+              );
+
+              return;
+
+            }
+
+          }
+
+
+          renderOrderReview();
+
+          showCheckoutStep(3);
+
+        }
+      );
+
+
+    $("#backToStep2")
+      .addEventListener(
+        "click",
+        () => showCheckoutStep(2)
+      );
+
+
+    /* =========================================================
+       ORDER REVIEW
+    ========================================================= */
+
+    function renderOrderReview() {
+
+      const delivery =
+        document.querySelector(
+          'input[name="checkoutDelivery"]:checked'
+        );
+
+      const deliveryValue =
+        delivery
+          ? delivery.value
+          : "pickup";
+
+
+      const subtotal =
+        getCartSubtotal();
+
+
+      let productsHTML =
+        cart.map(item => `
+
+          <div
+            style="
+              padding:7px 0;
+              border-bottom:1px solid var(--border);
+            "
+          >
+
+            <strong>
+              ${item.name}
+            </strong>
+
+            <span
+              style="
+                color:var(--text-secondary);
+                font-size:12px;
+              "
+            >
+              x${item.quantity}
+
+              ${
+                item.size
+                  ? ` · Talle ${item.size}`
+                  : ""
+              }
+
+              ${
+                item.color
+                  ? ` · ${item.color}`
+                  : ""
+              }
+            </span>
+
+            <span style="float:right;">
+              ${money(item.price * item.quantity)}
+            </span>
+
+          </div>
+
+        `).join("");
+
+
+      let deliveryHTML = "";
+
+      if (deliveryValue === "pickup") {
+
+        deliveryHTML = `
+          <strong>Retiro</strong>
+          <br>
+          <span style="color:var(--text-secondary);font-size:12px;">
+            ${STORE.address}
+          </span>
+        `;
+
+      } else {
+
+        deliveryHTML = `
+
+          <strong>Envío a domicilio</strong>
+
+          <br>
+
+          <span
+            style="
+              color:var(--text-secondary);
+              font-size:12px;
+            "
+          >
+
+            ${$("#shippingAddress").value}
+            ${$("#shippingNumber").value},
+
+            ${$("#shippingNeighborhood").value},
+
+            ${$("#shippingCity").value}
+
+            ${
+              $("#shippingPostal").value
+                ? ` · CP ${$("#shippingPostal").value}`
+                : ""
+            }
+
+          </span>
+
+        `;
+
+      }
+
+
+      $("#orderReview").innerHTML = `
+
+        <h4 style="margin-bottom:10px;">
+          Pedido
+        </h4>
+
+        ${productsHTML}
+
+        <div class="review-row">
+
+          <span>
+            Subtotal
+          </span>
+
+          <strong>
+            ${money(subtotal)}
+          </strong>
+
+        </div>
+
+        <div class="review-row">
+
+          <span>
+            Entrega
+          </span>
+
+          <strong>
+            ${deliveryValue === "pickup"
+              ? "Retiro"
+              : "Envío"
+            }
+          </strong>
+
+        </div>
+
+        <div
+          style="
+            margin-top:12px;
+            padding-top:12px;
+            border-top:1px solid var(--border);
+          "
+        >
+
+          ${deliveryHTML}
+
+        </div>
+
+        <div
+          style="
+            margin-top:15px;
+            font-size:20px;
+            font-weight:800;
+            text-align:right;
+          "
+        >
+          Total: ${money(subtotal)}
+        </div>
+
+      `;
+
+    }
+
+
+    /* =========================================================
+       PAYMENT
+    ========================================================= */
+
+    $$('input[name="paymentMethod"]')
+      .forEach(input => {
+
+        input.addEventListener(
+          "change",
+          function() {
+
+            $("#bankData")
+              .classList.toggle(
+                "show",
+                this.value === "transfer"
+              );
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       CONFIRMAR PEDIDO
+    ========================================================= */
+
+    $("#confirmOrderBtn")
+      .addEventListener(
+        "click",
+        confirmOrder
+      );
+
+
+    function confirmOrder() {
+
+      const payment =
+        document.querySelector(
+          'input[name="paymentMethod"]:checked'
+        );
+
+
+      if (!payment) {
+
+        showToast(
+          "Seleccioná un medio de pago."
+        );
+
+        return;
+
+      }
+
+
+      const delivery =
+        document.querySelector(
+          'input[name="checkoutDelivery"]:checked'
+        );
+
+
+      if (!delivery) {
+
+        showToast(
+          "Seleccioná una modalidad de entrega."
+        );
+
+        return;
+
+      }
+
+
+      const orderNumber =
+        generateOrderNumber();
+
+
+      const order = {
+
+        number:
+          orderNumber,
+
+        date:
+          new Date().toISOString(),
+
+        customer:
+          customerData,
+
+        items:
+          [...cart],
+
+        subtotal:
+          getCartSubtotal(),
+
+        shipping:
+          0,
+
+        total:
+          getCartSubtotal(),
+
+        delivery:
+          delivery.value,
+
+        payment:
+          payment.value,
+
+        receipt:
+          $("#receiptFile").files.length
+            ? $("#receiptFile").files[0].name
+            : null,
+
+        status:
+          payment.value === "mercadopago"
+            ? "Pago pendiente"
+            : "Pago pendiente de verificación"
+
+      };
+
+
+      /*
+       * IMPORTANTE:
+       *
+       * En esta versión de prueba el pedido se guarda
+       * localmente en el navegador.
+       *
+       * En una versión real, este objeto debe enviarse
+       * mediante fetch() a un backend / API.
+       */
+
+
+      const orders =
+        JSON.parse(
+          localStorage.getItem("urban_orders") || "[]"
+        );
+
+      orders.push(order);
+
+      localStorage.setItem(
+        "urban_orders",
+        JSON.stringify(orders)
+      );
+
+
+      lastOrder = order;
+
+
+      /*
+       * Limpiar carrito.
+       */
+
+      cart = [];
+
+      saveCart();
+
+      renderCart();
+
+
+      $("#checkoutModal")
+        .classList.remove("active");
+
+
+      showSuccess(order);
+
+    }
+
+
+    /* =========================================================
+       NÚMERO DE PEDIDO
+    ========================================================= */
+
+    function generateOrderNumber() {
+
+      const random =
+        Math.floor(
+          100000 +
+          Math.random() * 900000
+        );
+
+      return String(random);
+
+    }
+
+
+    /* =========================================================
+       SUCCESS
+    ========================================================= */
+
+    function showSuccess(order) {
+
+      $("#successOrderNumber")
+        .textContent =
+        `PEDIDO #${order.number}`;
+
+
+      const deliveryText =
+        order.delivery === "pickup"
+          ? "Retiro"
+          : "Envío a domicilio";
+
+
+      const paymentText = {
+
+        mercadopago:
+          "Mercado Pago",
+
+        transfer:
+          "Transferencia bancaria",
+
+        cash:
+          "Efectivo"
+
+      }[order.payment];
+
+
+      $("#successDetails").innerHTML = `
+
+        <div class="review-row">
+
+          <span>
+            Cliente
+          </span>
+
+          <strong>
+            ${order.customer.firstName}
+            ${order.customer.lastName}
+          </strong>
+
+        </div>
+
+        <div class="review-row">
+
+          <span>
+            Correo
+          </span>
+
+          <strong>
+            ${order.customer.email}
+          </strong>
+
+        </div>
+
+        <div class="review-row">
+
+          <span>
+            Teléfono
+          </span>
+
+          <strong>
+            ${order.customer.phone}
+          </strong>
+
+        </div>
+
+        <div class="review-row">
+
+          <span>
+            Entrega
+          </span>
+
+          <strong>
+            ${deliveryText}
+          </strong>
+
+        </div>
+
+        <div class="review-row">
+
+          <span>
+            Pago
+          </span>
+
+          <strong>
+            ${paymentText}
+          </strong>
+
+        </div>
+
+        <div class="review-row">
+
+          <span>
+            Estado
+          </span>
+
+          <strong style="color:var(--warning);">
+            ${order.status}
+          </strong>
+
+        </div>
+
+        <div
+          style="
+            text-align:right;
+            font-size:20px;
+            font-weight:800;
+            margin-top:10px;
+          "
+        >
+          Total: ${money(order.total)}
+        </div>
+
+      `;
+
+
+      $("#successModal")
+        .classList.add("active");
+
+    }
+
+
+    /* =========================================================
+       WHATSAPP
+    ========================================================= */
+
+    function generateWhatsappMessage(order) {
+
+      let message =
+        `Hola, realicé una compra en ${STORE.name}.%0A%0A`;
+
+      message +=
+        `Pedido #${order.number}%0A`;
+
+      message +=
+        `Nombre: ${order.customer.firstName} ${order.customer.lastName}%0A`;
+
+      message +=
+        `Email: ${order.customer.email}%0A`;
+
+      message +=
+        `Teléfono: ${order.customer.phone}%0A%0A`;
+
+      message +=
+        `Productos:%0A`;
+
+
+      order.items.forEach(item => {
+
+        message +=
+          `- ${item.name} x${item.quantity}`;
+
+        if (item.size)
+          message += ` · Talle ${item.size}`;
+
+        if (item.color)
+          message += ` · ${item.color}`;
+
+        message +=
+          ` = ${money(item.price * item.quantity)}%0A`;
+
+      });
+
+
+      message += `%0ATotal: ${money(order.total)}%0A`;
+
+      message +=
+        `Modalidad: ${
+          order.delivery === "pickup"
+            ? "Retiro"
+            : "Envío"
+        }%0A`;
+
+
+      if (
+        order.delivery === "shipping"
+      ) {
+
+        message +=
+          `Dirección: ${$("#shippingAddress").value} ${$("#shippingNumber").value}%0A`;
+
+        message +=
+          `Barrio: ${$("#shippingNeighborhood").value}%0A`;
+
+        message +=
+          `Ciudad: ${$("#shippingCity").value}%0A`;
+
+      }
+
+
+      message +=
+        `%0AMedio de pago: ${order.payment}%0A`;
+
+      message +=
+        `%0A¡Gracias!`;
+
+
+      return message;
+
+    }
+
+
+    $("#sendWhatsappBtn")
+      .addEventListener(
+        "click",
+        function() {
+
+          if (!lastOrder) return;
+
+          const message =
+            generateWhatsappMessage(lastOrder);
+
+          const url =
+            `https://wa.me/${STORE.whatsapp}?text=${message}`;
+
+          window.open(
+            url,
+            "_blank"
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       MENU
+    ========================================================= */
+
+    function openMenu() {
+
+      $("#sideMenu")
+        .classList.add("active");
+
+      $("#overlay")
+        .classList.add("active");
+
+      document.body.classList.add("no-scroll");
+
+    }
+
+
+    function closeMenu() {
+
+      $("#sideMenu")
+        .classList.remove("active");
+
+      $("#overlay")
+        .classList.remove("active");
+
+      document.body.classList.remove("no-scroll");
+
+    }
+
+
+    $("#menuBtn")
+      .addEventListener(
+        "click",
+        openMenu
+      );
+
+    $("#menuClose")
+      .addEventListener(
+        "click",
+        closeMenu
+      );
+
+    $("#overlay")
+      .addEventListener(
+        "click",
+        closeMenu
+      );
+
+
+    $$(".menu-link")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          closeMenu
+        );
+
+      });
+
+
+    /* =========================================================
+       CART OPEN / CLOSE
+    ========================================================= */
+
+    $("#cartBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          $("#cartDrawer")
+            .classList.add("active");
+
+        }
+      );
+
+
+    $("#cartClose")
+      .addEventListener(
+        "click",
+        () => {
+
+          $("#cartDrawer")
+            .classList.remove("active");
+
+        }
+      );
+
+
+    /* =========================================================
+       CHECKOUT
+    ========================================================= */
+
+    $("#checkoutBtn")
+      .addEventListener(
+        "click",
+        openCheckout
+      );
+
+
+    /* =========================================================
+       MODAL CLOSE
+    ========================================================= */
+
+    $$("[data-close]")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const id =
+              button.dataset.close;
+
+            $("#" + id)
+              .classList.remove("active");
+
+          }
+        );
+
+      });
+
+
+    $$(".modal")
+      .forEach(modal => {
+
+        modal.addEventListener(
+          "click",
+          event => {
+
+            if (
+              event.target === modal
+            ) {
+
+              modal.classList.remove(
+                "active"
+              );
+
+            }
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       SUCCESS CLOSE
+    ========================================================= */
+
+    $("#closeSuccessBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          $("#successModal")
+            .classList.remove("active");
+
+        }
+      );
+
+
+    /* =========================================================
+       FILTERS
+    ========================================================= */
+
+    $("#categoryFilter")
+      .addEventListener(
+        "change",
+        renderCatalog
+      );
+
+    $("#priceFilter")
+      .addEventListener(
+        "change",
+        renderCatalog
+      );
+
+    $("#stockFilter")
+      .addEventListener(
+        "change",
+        renderCatalog
+      );
+
+    $("#sortFilter")
+      .addEventListener(
+        "change",
+        renderCatalog
+      );
+
+
+    /* =========================================================
+       SEARCH
+    ========================================================= */
+
+    $("#searchInput")
+      .addEventListener(
+        "input",
+        renderCatalog
+      );
+
+
+    $("#searchBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          renderCatalog();
+
+          $("#productos")
+            .scrollIntoView({
+              behavior: "smooth"
+            });
+
+        }
+      );
+
+
+    /* =========================================================
+       HORIZONTAL SCROLL
+    ========================================================= */
+
+    $$(".scroll-btn")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const target =
+              document.getElementById(
+                button.dataset.target
+              );
+
+            const amount =
+              button.classList.contains(
+                "scroll-left"
+              )
+                ? -320
+                : 320;
+
+            target.scrollBy({
+              left: amount,
+              behavior: "smooth"
+            });
+
+          }
+        );
+
+      });
+
+
+    /* =========================================================
+       CONFIGURAR DATOS DE LA TIENDA
+    ========================================================= */
+
+    function applyStoreConfig() {
+
+      document.title =
+        `${STORE.name} | Tienda Online`;
+
+      $("#headerStoreName")
+        .textContent =
+        STORE.name;
+
+      $("#footerStoreName")
+        .textContent =
+        STORE.name;
+
+      $("#copyrightName")
+        .textContent =
+        STORE.name;
+
+      $("#heroDescription")
+        .textContent =
+        STORE.description;
+
+      $("#locationBusinessName")
+        .textContent =
+        STORE.name;
+
+      $("#locationAddress")
+        .textContent =
+        STORE.address;
+
+      $("#locationHours")
+        .textContent =
+        STORE.hours;
+
+      $("#instagramHandle")
+        .textContent =
+        "@" + STORE.instagram;
+
+
+      $("#instagramLink").href =
+        STORE.instagramUrl;
+
+      $("#facebookLink").href =
+        STORE.facebookUrl;
+
+      $("#tiktokLink").href =
+        STORE.tiktokUrl;
+
+      $("#mapsLink").href =
+        STORE.mapsUrl;
+
+      $("#emailLink").href =
+        `mailto:${STORE.email}`;
+
+
+      const whatsappUrl =
+        `https://wa.me/${STORE.whatsapp}`;
+
+
+      $("#whatsappLink").href =
+        whatsappUrl;
+
+      $("#contactWhatsappBtn").href =
+        whatsappUrl;
+
+    }
+
+
+    /* =========================================================
+       INIT
+    ========================================================= */
+
+    function init() {
+
+      applyStoreConfig();
+
+      renderCategories();
+
+      renderProducts();
+
+      renderCatalog();
+
+      renderCart();
+
+      updateCartCount();
+
+      $("#currentYear")
+        .textContent =
+        new Date().getFullYear();
+
+      /*
+       * Seleccionar retiro por defecto.
+       */
+
+      const pickup =
+        document.querySelector(
+          'input[name="checkoutDelivery"][value="pickup"]'
+        );
+
+      if (pickup) {
+
+        pickup.checked = true;
+
+      }
+
+    }
+
+
+    init();
+
+  </script>
 
 </body>
-
 </html>
+```
